@@ -671,6 +671,16 @@
         type: String,
         default: 'auto'
       },
+      
+      /**
+       * Disables the scroll adjust mechanic of the dropdown.
+       * @type {Boolean}
+       * @default false
+       */
+      disableScrollAdjust: {
+        type: Boolean,
+        default: false
+      }
     },
 
     data() {
