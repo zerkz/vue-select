@@ -702,6 +702,26 @@ describe('Select.vue', () => {
 			})
 		})
 
+		describe('Disabling Mouse Automatic Scrolling via disableMouseScrollAdjust', () => {
+			it('should not check if the scroll position needs to be adjusted when filtered options changes', (done) => {
+				const vm = new Vue({
+					template: '<div><v-select :options="options" disableScrollAdjust></v-select></div>',
+					components: {vSelect},
+					data: {
+						options: ['one', 'two', 'three']
+					}
+				}).$mount()
+
+				spyOn(vm.$children[0], 'maybeAdjustScroll')
+				vm.$children[0].search = 'two'
+
+				Vue.nextTick(() => {
+					expect(vm.$children[0].maybeAdjustScroll).toHaveBeenCalledTimes(0)
+					done()
+				})
+			})
+		})
+
 		describe('Measuring pixel distances', () => {
 			it('should calculate pointerHeight as the offsetHeight of the pointer element if it exists', () => {
 				const vm = new Vue({
